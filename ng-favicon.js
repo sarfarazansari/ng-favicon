@@ -1,4 +1,4 @@
-angular.module("favicon", [])
+angular.module("ng-favicon", [])
 .directive("favicon", function() {
 	var directive = {
 		restrict: "E",
