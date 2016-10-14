@@ -1,4 +1,4 @@
-angular.module("ng-favicon", [])
+angular.module("favicon", [])
 .directive("favicon", function() {
 	var directive = {
 		restrict: "E",
@@ -24,7 +24,8 @@ angular.module("ng-favicon", [])
 				scope.faviconUrl = createFaviUrl(url);
 			}
 			else{
-				scope.faviconUrl = createFaviUrl(scope.url);
+				var url = purifyUrl(scope.url);
+				scope.faviconUrl = createFaviUrl(url);
 			}
 		};
 
@@ -62,7 +63,7 @@ angular.module("ng-favicon", [])
 		}
 
 		function splitMainDomain(url){
-			var urlObj = new URL(url);			
+			var urlObj = new URL(url);
 			// would be true. dot found in url
 			if(urlObj.host.indexOf('.') !== -1){
 			  var urlArr = urlObj.host.split('.');
@@ -71,6 +72,11 @@ angular.module("ng-favicon", [])
 			else{
 				return  urlObj.protocol + '//' + urlObj.host;
 			}
+		}
+
+		function purifyUrl(url){
+			var urlObj = new URL(url);
+			return  urlObj.protocol + '//' + urlObj.host;
 		}
 
 		// init func
